@@ -3,15 +3,13 @@
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import {
-    ArrowDownCircleIcon,
-    ArrowPathIcon,
-    ArrowUpCircleIcon,
     Bars3Icon,
     PlusSmallIcon,
 } from '@heroicons/react/20/solid'
 import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import AcessoSemanal from "@/app/restaurante/components/AcessoSemanal";
 import FaturamentoEstimadoSemanal from "@/app/restaurante/components/FaturamentoEstimadoSemanal";
+import Image from "next/image";
 
 const navigation = [
     { name: 'Dashboard', href: '#' },
@@ -48,7 +46,7 @@ export default function Example() {
                             <span className="sr-only">Open main menu</span>
                             <Bars3Icon aria-hidden="true" className="size-5 text-gray-900" />
                         </button>
-                        <img
+                        <Image
                             alt="Your Company"
                             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                             className="h-8 w-auto"
@@ -68,7 +66,7 @@ export default function Example() {
                         </button>
                         <a href="#" className="-m-1.5 p-1.5">
                             <span className="sr-only">Your profile</span>
-                            <img
+                            <Image
                                 alt=""
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                 className="size-8 rounded-full bg-gray-800"
@@ -87,7 +85,7 @@ export default function Example() {
                             <div className="-ml-0.5">
                                 <a href="#" className="-m-1.5 block p-1.5">
                                     <span className="sr-only">Your Company</span>
-                                    <img
+                                    <Image
                                         alt=""
                                         src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                                         className="h-8 w-auto"
