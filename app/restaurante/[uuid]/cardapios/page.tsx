@@ -1,14 +1,14 @@
 'use client'
 
-import {useEffect, useState} from 'react'
+import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import {
     Bars3Icon,
+    PlusSmallIcon,
 } from '@heroicons/react/20/solid'
 import { BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import AcessoSemanal from "@/app/restaurante/components/AcessoSemanal";
 import FaturamentoEstimadoSemanal from "@/app/restaurante/components/FaturamentoEstimadoSemanal";
-import PratosPedidosNoDia from "@/app/restaurante/components/PratosPedidosNoDia";
 import Image from "next/image";
 
 const navigation = [
@@ -18,14 +18,17 @@ const navigation = [
     { name: 'Cozinha', href: '#' },
     { name: 'Suporte', href: '#' },
 ]
-
-const stats = [
-    { name: 'Acessos únicos (mês)', value: '$405,091.00', change: '+4.75%', changeType: 'positive' },
-    { name: 'Bebidas (mês)', value: '$12,787.00', change: '+54.02%', changeType: 'negative' },
-    { name: 'Pratos (mês)', value: '$245,988.00', change: '-1.39%', changeType: 'positive' },
-    { name: 'Faturamento estimado (mês)', value: '$30,156.00', change: '+10.18%', changeType: 'negative' },
+const secondaryNavigation = [
+    { name: 'Últimos 7 dias', href: '#', current: true },
+    { name: 'Últimos 30 dias', href: '#', current: false },
+    { name: 'Sempre', href: '#', current: false },
 ]
-
+const stats = [
+    { name: 'Acessos únicos', value: '$405,091.00', change: '+4.75%', changeType: 'positive' },
+    { name: 'Bebidas', value: '$12,787.00', change: '+54.02%', changeType: 'negative' },
+    { name: 'Pratos', value: '$245,988.00', change: '-1.39%', changeType: 'positive' },
+    { name: 'Faturamento Estimado', value: '$30,156.00', change: '+10.18%', changeType: 'negative' },
+]
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -33,14 +36,6 @@ function classNames(...classes: string[]) {
 
 export default function Example() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const [restaurante, setRestaurante] = useState("")
-    const [ano, setAno] = useState<number>(0)
-
-    useEffect(() => {
-        const date = new Date();
-        setAno(date.getFullYear())
-        setRestaurante("Restaurante LookCode")
-    }, [])
 
     return (
         <>
@@ -52,7 +47,7 @@ export default function Example() {
                             <Bars3Icon aria-hidden="true" className="size-5 text-gray-900" />
                         </button>
                         <Image
-                            alt={restaurante}
+                            alt="Your Company"
                             src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
                             className="h-8 w-auto"
                         />
@@ -69,6 +64,14 @@ export default function Example() {
                             <span className="sr-only">View notifications</span>
                             <BellIcon aria-hidden="true" className="size-6" />
                         </button>
+                        <a href="#" className="-m-1.5 p-1.5">
+                            <span className="sr-only">Your profile</span>
+                            <Image
+                                alt=""
+                                src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                className="size-8 rounded-full bg-gray-800"
+                            />
+                        </a>
                     </div>
                 </div>
                 <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -110,7 +113,21 @@ export default function Example() {
                     {/* Secondary navigation */}
                     <header className="pt-6 pb-4 sm:pb-6">
                         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-6 px-4 sm:flex-nowrap sm:px-6 lg:px-8">
-                            <h1 className="text-base/7 font-semibold text-gray-900">Painel: {restaurante}</h1>
+                            <h1 className="text-base/7 font-semibold text-gray-900">Painel</h1>
+                            <div className="order-last flex w-full gap-x-8 text-sm/6 font-semibold sm:order-0 sm:w-auto sm:border-l sm:border-gray-200 sm:pl-6 sm:text-sm/7">
+                                {secondaryNavigation.map((item) => (
+                                    <a key={item.name} href={item.href} className={item.current ? 'text-indigo-600' : 'text-gray-700'}>
+                                        {item.name}
+                                    </a>
+                                ))}
+                            </div>
+                            <a
+                                href="#"
+                                className="ml-auto flex items-center gap-x-1 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                <PlusSmallIcon aria-hidden="true" className="-ml-1.5 size-5" />
+                                New invoice
+                            </a>
                         </div>
                     </header>
 
@@ -156,8 +173,8 @@ export default function Example() {
                     </div>
                 </div>
 
-                <div className="mx-auto flex mt-4 rounded-xl gap-8 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto flex mt-4 rounded-xl bg-gray-50 flex-col w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-4">
+                <div className="mx-auto flex mt-4 rounded-xl gap-4 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                    <div className="mx-auto flex mt-4 rounded-xl bg-gray-100 flex-col w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-4">
                         <div className="px-4 py-5 sm:px-6">
                             <h1 className="text-base/7 font-semibold text-gray-900">Acessos únicos por dia</h1>
                         </div>
@@ -167,7 +184,7 @@ export default function Example() {
                     </div>
 
 
-                    <div className="mx-auto flex mt-4 rounded-xl bg-gray-50 flex-col w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-4">
+                    <div className="mx-auto flex mt-4 rounded-xl bg-gray-100 flex-col w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-4">
                         <div className="px-4 py-5 sm:px-6">
                             <h1 className="text-base/7 font-semibold text-gray-900">Faturamento estimado por dia</h1>
                         </div>
@@ -177,25 +194,19 @@ export default function Example() {
                     </div>
                 </div>
 
-                <div className="mx-auto flex my-4 rounded-xl flex-col gap-4 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto flex mt-4 rounded-xl bg-gray-50 flex-col w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-4">
-                        <div className="px-4 py-5 sm:px-6">
-                            <h1 className="text-base/7 font-semibold text-gray-900">Pratos mais pedidos hoje</h1>
-                        </div>
-                        <div className="px-4 py-5 sm:p-6 w-full">
-                            <PratosPedidosNoDia />
+                <div className="space-y-16 py-16 xl:space-y-20">
+
+                    {/* Recent activity table */}
+                    <div>
+
+                        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <h2 className="mx-auto max-w-2xl text-base font-semibold text-gray-900 lg:mx-0 lg:max-w-none">
+                                Pedidos recentes
+                            </h2>
                         </div>
                     </div>
                 </div>
             </main>
-            <footer>
-                <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <div className="border-t border-gray-200 py-8 text-center text-sm text-gray-500 sm:text-left">
-                        <span className="block sm:inline">&copy; {ano} LookCode, LTDA.</span>{' '}
-                        <span className="block sm:inline">All rights reserved.</span>
-                    </div>
-                </div>
-            </footer>
         </>
     )
 }
